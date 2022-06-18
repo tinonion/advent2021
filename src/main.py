@@ -4,11 +4,11 @@ import typer
 app = typer.Typer()
 
 @app.command()
-def day(day_number: str, input_path=typer.Argument(default=None)):
+def day(day_number: str, use_sample_input=typer.Option(False, "--use-sample-input", "-s", is_flag=True, flag_value=True)):
   day_solution = importlib.import_module(f"days.{day_number}")
 
-  if input_path:
-    day_input = input_path
+  if use_sample_input:
+    day_input = f"src/days/input/{day_number}-sample.txt"
   else:
     day_input = f"src/days/input/{day_number}.txt"
 
