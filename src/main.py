@@ -4,9 +4,13 @@ import typer
 app = typer.Typer()
 
 @app.command()
-def day(day_number: str):
+def day(day_number: str, input_path=typer.Argument(default=None)):
   day_solution = importlib.import_module(f"days.{day_number}")
-  day_input = f"src/days/data/{day_number}.txt"
+
+  if input_path:
+    day_input = input_path
+  else:
+    day_input = f"src/days/input/{day_number}.txt"
 
   try:
     typer.echo(f"part one: {day_solution.part_one(day_input)}")
